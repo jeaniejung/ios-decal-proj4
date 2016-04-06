@@ -1,54 +1,54 @@
-# App Name here: 
----------------------
+#TopTen
 
 ## Authors
----------------------
 * Eui Jin "Jeanie" Jung
 * Ruijing Li 
 
 ## Purpose
----------------------
-Name is a high purpose 
+* A top ten list of various aspects nearby in the area, created by users,   
+voted by users.
 
 ##Features
----------------------
-* A question can pop out and then users can submit an answer. 
-* Would be very localized questions, users can make their own questions
-* Voting for top questions/ top answers
-* 
-* 
-* 
+* Ability to create handle
+* Users can vote on every top ten list to create a holistic top ten
+* Users can suggest a ton ten topic
+* Users can vote on potential ton ten topics
+* Topic most voted on will be created at the end of the day 
 
 ## Control Flow
----------------------
-* When users start the app, there will be a simple log in button or browse anonymous 
-* There will be a menu, submit a question button, or vote one answer for weekly question
-* 
-* 
+* First-time users will be asked to create an account
+* First-time users will be asked to provide access to location
+* First row: New top-ten topic of the day
+* Rest of the rows will have top-ten topics with the top item shown
 
-Bullet Points: 
-[Walk us through how your app would work - how the user would interact with it, starting from the initial screen. e.g. Users are initially presented with a splash screen, where they can log in or browse as a guest. Once done, they see a curated list of some of the newest and coolest cat outfits. Tapping on a cat outfit entry takes you to that cat outfit's listing page.]
+* Users can tap on one of the top-ten to vote
+* When user taps on one of the top-ten, they will be presented with  
+table view modally
+* Note, the top ten will be highlighted for emphasis
+* The new table view will have a top ten list of items for a user to vote on
+* The user is limited to add one item to a top-ten list
+* User can vote on as many items as he/she wants on a top-ten list
 
-* User 
+* Tab on the top to access potential top-ten questions
+* User can submit one top-ten topic users wants to see, per day
+* Users can also vote on as many top-ten topics submitted by others users 
+* Note, the top-voted top-ten question will be created at midnight
 
 ## Implementation
 
 ### Model
-Bullet Points: [List the files in your Model, e.g. Item.Swift]
-* Question = 
-* User = Vote, id, username
-* Answer
+* User.Swift
+* Topic.Swift
+* Item.Swift
 
 ### View
-Bullet Points: [List your different Views, e.g. OutfitListTableView]
 * LogInView
-* StartView
-* QuestionSubmissionView
-* VoteScreenView
+* ItemTableView
+* TopicTableView
+* PotentialTopicTableView
 
 ### Controller
-Bullet Points: [List the files in your Controller, e.g. OutfitListTableViewController]
 * LogInViewController
-* StartScreenViewController
-* QuestionSubmissionViewController
-* VoteScreenViewController
+* ItemTableViewController
+* TopicTableViewController
+* PotentialTopicTableViewController
