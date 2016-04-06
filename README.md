@@ -20,7 +20,6 @@ voted by users.
 * First-time users will be asked to provide access to location
 * First row: New top-ten topic of the day
 * Rest of the rows will have top-ten topics with the top item shown
-
 * Users can tap on one of the top-ten to vote
 * When user taps on one of the top-ten, they will be presented with  
 table view modally
@@ -28,7 +27,6 @@ table view modally
 * The new table view will have a top ten list of items for a user to vote on
 * The user is limited to add one item to a top-ten list
 * User can vote on as many items as he/she wants on a top-ten list
-
 * Tab on the top to access potential top-ten questions
 * User can submit one top-ten topic users wants to see, per day
 * Users can also vote on as many top-ten topics submitted by others users 
