@@ -33,23 +33,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FVd-JT-haj">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopicCell" id="FVd-JT-haj" customClass="TopicTableViewCell" customModule="TopTen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FVd-JT-haj" id="vOS-dd-8Yi">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jqz-Qz-OB1">
-                                            <rect key="frame" x="470" y="-73" width="154" height="156"/>
-                                            <state key="normal" title="Button" image="GreyDownArrow.png"/>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpR-2w-0Yi">
-                                            <rect key="frame" x="524" y="13" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykk-J6-dNm">
+                                            <rect key="frame" x="301" y="0.0" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efD-vv-NlT">
+                                            <rect key="frame" x="301" y="22" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6q-1j-f63">
+                                            <rect key="frame" x="18" y="0.0" width="44" height="35"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="topicAnswer" destination="efD-vv-NlT" id="nOb-Rl-8dD"/>
+                                    <outlet property="topicName" destination="ykk-J6-dNm" id="7Tu-1q-sVu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -63,7 +74,7 @@
             </objects>
             <point key="canvasLocation" x="2631" y="325"/>
         </scene>
-        <!--What Do You Want to Know?-->
+        <!--Top Ten-->
         <scene sceneID="1ca-HJ-5bh">
             <objects>
                 <tableViewController id="9Ag-fa-ORl" customClass="PotentialTopicTableViewController" customModule="TopTen" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,13 +97,13 @@
                             <outlet property="delegate" destination="9Ag-fa-ORl" id="FHu-G1-ar0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="What Do You Want to Know?" id="kHJ-Pt-xUt"/>
+                    <navigationItem key="navigationItem" title="Top Ten" id="kHJ-Pt-xUt"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="obs-Ug-kBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2220" y="1285"/>
         </scene>
-        <!--What's Your Top Ten?-->
+        <!--Item Table View Controller-->
         <scene sceneID="xDe-UZ-XBq">
             <objects>
                 <tableViewController id="VhJ-mF-Yoy" customClass="ItemTableViewController" customModule="TopTen" customModuleProvider="target" sceneMemberID="viewController">
@@ -107,6 +118,16 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AfB-oJ-Kdz" id="VU8-kT-OJU">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDZ-wL-aSl">
+                                            <rect key="frame" x="546" y="13" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThJ-zI-92D">
+                                            <rect key="frame" x="546" y="-5" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -115,7 +136,7 @@
                             <outlet property="delegate" destination="VhJ-mF-Yoy" id="Gvc-oN-mjH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="What's Your Top Ten?" id="PT0-q0-BDv"/>
+                    <navigationItem key="navigationItem" id="PT0-q0-BDv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMZ-ls-ioe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -196,7 +217,4 @@
             <point key="canvasLocation" x="3345" y="325"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="GreyDownArrow.png" width="100" height="156"/>
-    </resources>
 </document>
