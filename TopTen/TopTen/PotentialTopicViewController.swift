@@ -11,6 +11,9 @@ import UIKit
 class PotentialTopicViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var potentialTopicTableView: UITableView!
+    @IBOutlet var timer: UILabel!
+    @IBOutlet var topicSuggestTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

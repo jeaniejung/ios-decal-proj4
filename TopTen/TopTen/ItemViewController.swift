@@ -10,7 +10,9 @@ import UIKit
 
 class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var itemTableView: UITableView!
-
+    @IBOutlet var topicName: UILabel!
+    @IBOutlet var itemSuggestTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

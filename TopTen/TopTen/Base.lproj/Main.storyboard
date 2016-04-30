@@ -14,6 +14,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="4322" y="-5"/>
         </scene>
         <!--Top Ten Topic-->
         <scene sceneID="7xj-ae-3hu">
@@ -34,19 +35,19 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nQ-GC-5tl">
                                             <rect key="frame" x="23" y="8" width="28" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOBA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF5-Yy-Kht">
                                             <rect key="frame" x="271" y="0.0" width="58" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharetea" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmz-M9-fgd">
                                             <rect key="frame" x="266" y="22" width="68.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -60,6 +61,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="topicAnswer" destination="Mmz-M9-fgd" id="wGu-4g-SYp"/>
+                                    <outlet property="topicClicks" destination="8nQ-GC-5tl" id="GCL-7n-mwL"/>
+                                    <outlet property="topicName" destination="LF5-Yy-Kht" id="ddp-rx-HhX"/>
                                     <segue destination="MkV-BT-Ydn" kind="show" id="N8x-vt-uUc"/>
                                 </connections>
                             </tableViewCell>
@@ -146,7 +150,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Frat houses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOM-zj-wtU">
                                                     <rect key="frame" x="25" y="15" width="155" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAt-dt-l1X">
@@ -159,6 +163,9 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="potentialTopicName" destination="WOM-zj-wtU" id="k08-xY-gol"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -169,7 +176,7 @@
                                     <constraint firstAttribute="height" constant="33" id="wL9-zd-SUu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -185,6 +192,8 @@
                     <navigationItem key="navigationItem" title="Top Ten Potential" id="gCd-K6-gVu"/>
                     <connections>
                         <outlet property="potentialTopicTableView" destination="b4Q-kz-RAR" id="Ryq-YO-hfk"/>
+                        <outlet property="timer" destination="sA3-ec-dmK" id="VJb-QR-egx"/>
+                        <outlet property="topicSuggestTextField" destination="PQ0-so-OUf" id="2Tq-t3-iYf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J2z-jc-h9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,7 +215,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boba" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gy-Cu-8ka">
                                 <rect key="frame" x="252" y="92" width="96" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="37"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Suggest" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dev-YF-euS">
@@ -235,15 +244,23 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHj-gU-O5l">
                                                     <rect key="frame" x="17" y="11" width="8" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharetea" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oxn-Qf-R48">
                                                     <rect key="frame" x="266" y="11.5" width="68.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hd8-yR-hpc">
+                                                    <rect key="frame" x="559" y="25" width="24" height="18.5"/>
+                                                    <state key="normal" title="Button" image="GreyDownArrow"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-dx-YZG">
+                                                    <rect key="frame" x="559" y="1.5" width="24" height="19.5"/>
+                                                    <state key="normal" title="Button" image="GreyUpArrow"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Oxn-Qf-R48" firstAttribute="centerX" secondItem="L6m-QB-iQP" secondAttribute="centerX" id="Jk4-wm-2yc"/>
@@ -252,6 +269,10 @@
                                                 <constraint firstItem="fHj-gU-O5l" firstAttribute="centerY" secondItem="L6m-QB-iQP" secondAttribute="centerY" id="u1H-z9-48V"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemName" destination="Oxn-Qf-R48" id="LAe-3z-VLM"/>
+                                            <outlet property="itemRank" destination="fHj-gU-O5l" id="iEx-0E-e0T"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -269,7 +290,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="itemSuggestTextField" destination="dev-YF-euS" id="Tl6-hJ-cuX"/>
                         <outlet property="itemTableView" destination="7mN-C6-vvq" id="gue-J6-K2p"/>
+                        <outlet property="topicName" destination="1gy-Cu-8ka" id="hbR-5L-KD3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6G-o5-UNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
