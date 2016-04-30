@@ -15,12 +15,12 @@
 		2CC33F361CC89F4100A88BA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC33F341CC89F4100A88BA3 /* LaunchScreen.storyboard */; };
 		2CC33F411CC89F4100A88BA3 /* TopTenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC33F401CC89F4100A88BA3 /* TopTenTests.swift */; };
 		2CC33F4C1CC89F4100A88BA3 /* TopTenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC33F4B1CC89F4100A88BA3 /* TopTenUITests.swift */; };
-		2CC33F5A1CC8A75400A88BA3 /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC33F591CC8A75400A88BA3 /* ItemTableViewController.swift */; };
+		2CC33F5A1CC8A75400A88BA3 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC33F591CC8A75400A88BA3 /* ItemViewController.swift */; };
 		9E22F5AE1CCC2DD3009C032D /* TopicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5AD1CCC2DD3009C032D /* TopicTableViewController.swift */; };
 		9E22F5B61CCC2EE3009C032D /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5B51CCC2EE3009C032D /* Topic.swift */; };
 		9E22F5B81CCC2EEB009C032D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5B71CCC2EEB009C032D /* Item.swift */; };
 		9E22F5BA1CCC2EF5009C032D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5B91CCC2EF5009C032D /* User.swift */; };
-		9E22F5BC1CCC2F61009C032D /* PotentialTopicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5BB1CCC2F61009C032D /* PotentialTopicTableViewController.swift */; };
+		9E22F5BC1CCC2F61009C032D /* PotentialTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5BB1CCC2F61009C032D /* PotentialTopicViewController.swift */; };
 		9E22F5BE1CCC33A1009C032D /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5BD1CCC33A1009C032D /* TopicTableViewCell.swift */; };
 		9E22F5C01CCC33BA009C032D /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5BF1CCC33BA009C032D /* ItemTableViewCell.swift */; };
 		9E22F5C21CCC33C7009C032D /* PotentialTopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F5C11CCC33C7009C032D /* PotentialTopicTableViewCell.swift */; };
@@ -62,12 +62,12 @@
 		2CC33F471CC89F4100A88BA3 /* TopTenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopTenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CC33F4B1CC89F4100A88BA3 /* TopTenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTenUITests.swift; sourceTree = "<group>"; };
 		2CC33F4D1CC89F4100A88BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CC33F591CC8A75400A88BA3 /* ItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
+		2CC33F591CC8A75400A88BA3 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		9E22F5AD1CCC2DD3009C032D /* TopicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicTableViewController.swift; sourceTree = "<group>"; };
 		9E22F5B51CCC2EE3009C032D /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		9E22F5B71CCC2EEB009C032D /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9E22F5B91CCC2EF5009C032D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		9E22F5BB1CCC2F61009C032D /* PotentialTopicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotentialTopicTableViewController.swift; sourceTree = "<group>"; };
+		9E22F5BB1CCC2F61009C032D /* PotentialTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotentialTopicViewController.swift; sourceTree = "<group>"; };
 		9E22F5BD1CCC33A1009C032D /* TopicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		9E22F5BF1CCC33BA009C032D /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		9E22F5C11CCC33C7009C032D /* PotentialTopicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotentialTopicTableViewCell.swift; sourceTree = "<group>"; };
@@ -181,9 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				9E22F5AD1CCC2DD3009C032D /* TopicTableViewController.swift */,
-				2CC33F591CC8A75400A88BA3 /* ItemTableViewController.swift */,
+				2CC33F591CC8A75400A88BA3 /* ItemViewController.swift */,
 				2CC33F2A1CC89F4100A88BA3 /* ViewController.swift */,
-				9E22F5BB1CCC2F61009C032D /* PotentialTopicTableViewController.swift */,
+				9E22F5BB1CCC2F61009C032D /* PotentialTopicViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -341,9 +341,9 @@
 				2CC33F291CC89F4100A88BA3 /* AppDelegate.swift in Sources */,
 				9E22F5BA1CCC2EF5009C032D /* User.swift in Sources */,
 				9E22F5BE1CCC33A1009C032D /* TopicTableViewCell.swift in Sources */,
-				9E22F5BC1CCC2F61009C032D /* PotentialTopicTableViewController.swift in Sources */,
+				9E22F5BC1CCC2F61009C032D /* PotentialTopicViewController.swift in Sources */,
 				9E22F5B81CCC2EEB009C032D /* Item.swift in Sources */,
-				2CC33F5A1CC8A75400A88BA3 /* ItemTableViewController.swift in Sources */,
+				2CC33F5A1CC8A75400A88BA3 /* ItemViewController.swift in Sources */,
 				9E22F5C01CCC33BA009C032D /* ItemTableViewCell.swift in Sources */,
 				2CC33F311CC89F4100A88BA3 /* TopTen.xcdatamodeld in Sources */,
 			);
