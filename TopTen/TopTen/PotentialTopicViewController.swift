@@ -42,7 +42,7 @@ class PotentialTopicViewController: UIViewController, UITableViewDataSource, UIT
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("PotentialTopicCell", forIndexPath: indexPath) as! PotentialTopicTableViewCell
 
         // Configure the cell...
 
