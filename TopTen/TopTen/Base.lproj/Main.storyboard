@@ -40,15 +40,18 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN3-SR-HEi">
-                                <rect key="frame" x="273" y="399" width="55" height="30"/>
-                                <state key="normal" title="Sign Up"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyX-BP-yTU">
                                 <rect key="frame" x="277" y="354" width="47" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
-                                    <segue destination="TlF-bF-00x" kind="presentation" id="wf9-lH-1Iz"/>
+                                    <action selector="signInMethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="90A-Pd-4sr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN3-SR-HEi">
+                                <rect key="frame" x="273" y="399" width="80" height="30"/>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="signUpMethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HXk-1k-lPg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -67,6 +70,10 @@
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="PasswordTextField" destination="bbq-Wh-LO2" id="7HI-ak-dPt"/>
+                        <outlet property="UsernameTextField" destination="Jdw-Yq-i8g" id="eBc-HI-Y8q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

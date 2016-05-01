@@ -7,8 +7,29 @@
 //
 
 import UIKit
+import Parse
+
+
 
 class Topic: NSObject {
+//    func createTopic(name: String!) {
+//        var topic = PFObject(className:"Topic")
+//        topic["name"] = name
+//        topic["clickcount"] = 0
+//    }
+//    
+//    func incrementClick() {
+//        topic["clickcount"] = Int(topic["clickcount"]) + 1
+//    }
+//    topic.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+//        print("Topic has been saved.")
+//    }
+//    
+//    
+    
+//    var topic = PFObject(className:"Topic")
+//    topic["name"] = "asdf"
+    
     var topicTitle: String!
     var items : [Item]!
 
