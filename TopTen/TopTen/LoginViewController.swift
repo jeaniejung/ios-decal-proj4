@@ -161,7 +161,7 @@ class LoginViewController: UIViewController {
                 } else {
                     myMap[email] = id
                     print("1")
-                    print(myMap[email])
+//                    print(myMap[email])
                     userToID["map"] = myMap
                     print("2")
                     print(userToID["map"])

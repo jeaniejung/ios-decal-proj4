@@ -7,18 +7,30 @@
 //
 
 import UIKit
+import Parse
 
 class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var itemTableView: UITableView!
     @IBOutlet var topicName: UILabel!
     @IBOutlet var itemSuggestTextField: UITextField!
-    
-    var itemsList: [Item]!
+    var topicID: String!
+    var itemArray: [PFObject]!
     var topic: Topic!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        itemArray = [PFObject]()
+        retrieveItemsOfTopic()
+        let delay = 5.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            
+            self.itemTableView.reloadData()
+//            print(self.topicList)
+            
+        })
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,15 +38,13 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.itemTableView.delegate = self
         self.itemTableView.dataSource = self
-        if itemsList == nil {
-            itemsList = [Item]()
-        }
+
     }
     
     override func viewWillDisappear(animated: Bool) {
         let sourceVC = navigationController?.viewControllers.first as! TopicTableViewController
-        sourceVC.currentTopic = topic
-        sourceVC.updatedItemList = itemsList
+//        sourceVC.currentTopic = topic
+//        sourceVC.updatedItemList = itemsList
         
 
     }
@@ -53,32 +63,65 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return itemsList.count
+        return itemArray.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath) as! ItemTableViewCell
         // Configure the cell...
-        cell.itemName.text = itemsList[indexPath.row].itemDescription
+        cell.itemName.text = itemArray[indexPath.row]["title"] as! String
         cell.itemRank.text = String(indexPath.row + 1)
         print(cell.itemRank.text)
         return cell
     }
     
     @IBAction func addItem(sender: UIButton) {
-        if itemsList.count < 10  && itemSuggestTextField?.text != "" {
-            let item = Item()
-            item.itemDescription = itemSuggestTextField.text
-            itemsList.append(item)
+        if itemArray.count < 10  && itemSuggestTextField?.text != "" {
+            let first = PFObject(className:"Item")
+            first["title"] = itemSuggestTextField.text
+            first["parent"] = topicID
+            first.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    // The object has been saved.
+                } else {
+                    // There was a problem, check error.description
+                }
+            }
+            itemArray.append(first)
             itemSuggestTextField.text = ""
-            sortItems()
+//            sortItems()
         }
         itemTableView.reloadData()
     }
     
-    func sortItems() {
-        itemsList = itemsList.sort({a, b in a.votes > b.votes})
+//    func sortItems() {
+//        itemArray = itemArray.sort({a, b in votesOf(a) > votesOf(b)})
+//    }
+//    
+//    func votesOf(item: Item) {
+//        
+//    }
+    
+    func retrieveItemsOfTopic() {
+        let query = PFQuery(className: "Item")
+        query.whereKey("parent", equalTo: topicID)
+        query.findObjectsInBackgroundWithBlock {
+            (items: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                for item in items! {
+                    if let myItem = item as PFObject? {
+                        self.itemArray.append(myItem)
+                    }                }
+                self.itemTableView.reloadData()
+                
+            }else{
+                self.itemTableView.reloadData()
+            }
+        }
+        
     }
+    
     
 
     /*

@@ -10,10 +10,10 @@ import UIKit
 import Parse
 
 class TopicTableViewController: UITableViewController {
-    var topicList: [Topic]!
-    var updatedItemList: [Item]!
-    var currentTopic: Topic!
-    
+    var topicList = [String]()
+    var topicTitleToClicks = [String : Int]()
+    var topicTitleToID = [String : String]()
+    var topicTitleToBest = [String : String]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,63 +22,73 @@ class TopicTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        topicList = [Topic]()
+        createFakeData()
         retrieveTopicList()
-        let topic = Topic()
-        topic.topicTitle = "BOBA"
-        let item = Item()
-        item.itemDescription = "Sharetea"
-        topic.items = [item]
-        topic.clicks = 100
-        self.topicList.append(topic)
-        self.tableView.reloadData()
+        let delay = 1.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            
+            self.tableView.reloadData()
+            print(self.topicList)
+            
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
-        if updatedItemList != nil && currentTopic != nil {
-            currentTopic.items = updatedItemList
-            if topicList.contains(currentTopic) {
-                let index = topicList.indexOf(currentTopic)
-                topicList.removeAtIndex(index!)
-                topicList.append(currentTopic)
+        self.tableView.reloadData()
+    }
+    
+    func createFakeData() {
+        var first = PFObject(className:"Topic")
+        first["title"] = "Boba"
+        first["clicks"] = 199
+        first["best"] = "Ucha"
+        first.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+            } else {
+                // There was a problem, check error.description
             }
-            self.tableView.reloadData()
         }
     }
     
     func retrieveTopicList() {
-        
         let query = PFQuery(className:"Topic")
         query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
+            (topics: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
-                print("Yes")
-                for object in objects! {
+                if topics!.count == 0 {
+                    self.createFakeData()
+                }
+                for topic in topics! {
+                    if let myTopic = topic as PFObject? {
+                        let topicTitle = myTopic["title"]! as! String
+                        let topicClicks = myTopic["clicks"]! as! Int
+                        let topicBest = myTopic["best"]! as! String
+                        let topicID = myTopic.objectId! as! String
+                        
+                        self.topicList.append(topicTitle)
+                        self.topicTitleToClicks[topicTitle] = topicClicks
+                        self.topicTitleToID[topicTitle] = topicID
+                        self.topicTitleToBest[topicTitle] = topicBest
+                        print(topicTitle)
+                    }
                     //Set test to total (assuming self.test is Int)
-                    let topic = Topic()
-                    topic.topicTitle = object["title"] as! String
-                    topic.items = object["items"] as! Array
-                    topic.clicks = object["clicks"] as! Int
-                    self.topicList.append(topic)
+                    
                 }
                 self.tableView.reloadData()
+                
             }else{
-                //Handle error
-                //Fake data
-                print("Hi")
-                let topic = Topic()
-                topic.topicTitle = "BOBA"
-                let item = Item()
-                item.itemDescription = "Sharetea"
-                topic.items = [item]
-                topic.clicks = 100
-                self.topicList.append(topic)
                 self.tableView.reloadData()
             }
         }
        
     }
     
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -94,7 +104,7 @@ class TopicTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return topicList.count
+        return self.topicList.count
     }
 
     
@@ -102,9 +112,13 @@ class TopicTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as! TopicTableViewCell
         
          //Configure the cell...
-        cell.topicClicks.text = String(topicList[indexPath.row].clicks)
-        cell.topicName.text = topicList[indexPath.row].topicTitle
-        cell.topicAnswer.text = topicList[indexPath.row].getTop().itemDescription
+        print(topicList.count)
+        
+        let topicString = topicList[indexPath.row]
+        
+        cell.topicName.text = topicString as! String
+        cell.topicClicks.text = String(topicTitleToClicks[topicString]!)
+        cell.topicAnswer.text = String(topicTitleToBest[topicString]!)
         cell.num = indexPath.row
         return cell
     }
@@ -114,9 +128,11 @@ class TopicTableViewController: UITableViewController {
         if segue.identifier == "goToItemView" {
             let targetVC = segue.destinationViewController as! ItemViewController
             targetVC.topicName = sender?.topicName
+        
             let cell = sender as! TopicTableViewCell
-            targetVC.itemsList = topicList[cell.num].items
-            targetVC.topic = topicList[cell.num]
+                targetVC.topicID = topicTitleToID[cell.topicName.text!]
+//            targetVC.itemsList = topicList[cell.num].items
+//            targetVC.topic = topicList[cell.num]
         }
     }
  
