@@ -24,7 +24,7 @@ class PotentialTopicViewController: UIViewController, UITableViewDataSource, UIT
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.potentialTopicTableView.delegate = self
         self.potentialTopicTableView.dataSource = self
-        setTimer()
+        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(setTimer), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,16 +55,18 @@ class PotentialTopicViewController: UIViewController, UITableViewDataSource, UIT
     
     func setTimer() {
         
+        let delay = 1.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         let date = NSDate()
         let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let newDate = cal.startOfDayForDate(date)
-        
-        let intervalDate = newDate.timeIntervalSinceNow
+        var intervalDate = newDate.timeIntervalSinceNow
         let interval = Int(intervalDate)
-        let seconds = 60 - ((-1 * interval) % 60)
-        let minutes = 60 - (((-1 * interval) / 60) % 60)
-        let hours = 24 - ((-1 * interval) / 3600)
-        timer.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        let seconds = 59 - -1 * (interval % 60)
+        let minutes = 59 - -1 * ((interval / 60) % 60)
+        let hours = 23 - -1 * (interval / 3600)
+        self.timer.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        
     }
 
     /*

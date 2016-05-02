@@ -329,41 +329,32 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hd8-yR-hpc">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hd8-yR-hpc">
                                                     <rect key="frame" x="459" y="27.5" width="24" height="16"/>
                                                     <state key="normal" title="Button" image="GreyDownArrow"/>
                                                     <connections>
                                                         <action selector="downVote:" destination="MkV-BT-Ydn" eventType="touchUpInside" id="5KQ-LA-Qo4"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNa-mw-Kls">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNa-mw-Kls">
                                                     <rect key="frame" x="459" y="0.0" width="24" height="23"/>
                                                     <state key="normal" title="Button" image="GreyUpArrow"/>
                                                     <connections>
                                                         <action selector="upVote:" destination="MkV-BT-Ydn" eventType="touchUpInside" id="JsZ-9Y-cFN"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drr-e0-BfL">
-                                                    <rect key="frame" x="409" y="11" width="42" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="42" id="bLw-p6-Liv"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drr-e0-BfL">
+                                                    <rect key="frame" x="390" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="hd8-yR-hpc" secondAttribute="trailing" constant="109" id="1Ku-UR-V5v"/>
-                                                <constraint firstItem="Drr-e0-BfL" firstAttribute="top" secondItem="L6m-QB-iQP" secondAttribute="topMargin" constant="3" id="7Q0-6Z-eYc"/>
                                                 <constraint firstItem="Oxn-Qf-R48" firstAttribute="centerX" secondItem="L6m-QB-iQP" secondAttribute="centerX" id="Jk4-wm-2yc"/>
                                                 <constraint firstItem="fHj-gU-O5l" firstAttribute="leading" secondItem="L6m-QB-iQP" secondAttribute="leadingMargin" constant="109" id="K7h-Hg-Fq2"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fHj-gU-O5l" secondAttribute="bottom" constant="3.5" id="Qps-is-342"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="gNa-mw-Kls" secondAttribute="trailing" constant="109" id="YdV-qe-7Wu"/>
-                                                <constraint firstItem="gNa-mw-Kls" firstAttribute="leading" secondItem="Drr-e0-BfL" secondAttribute="trailing" constant="8" id="eLq-qM-fz2"/>
                                                 <constraint firstItem="Oxn-Qf-R48" firstAttribute="centerY" secondItem="L6m-QB-iQP" secondAttribute="centerY" id="gwN-aA-jjr"/>
-                                                <constraint firstItem="hd8-yR-hpc" firstAttribute="leading" secondItem="Drr-e0-BfL" secondAttribute="trailing" constant="8" id="lhh-VY-jUQ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Drr-e0-BfL" secondAttribute="bottom" constant="3.5" id="zhq-Ww-cre"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

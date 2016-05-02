@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     let userToIDString = "cHLdDIagBH"
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var UsernameTextField: UITextField!
+
     
     @IBAction func signInMethod(sender: AnyObject) {
         initiateMapIfNotExist()
@@ -48,24 +49,28 @@ class LoginViewController: UIViewController {
             self.addNewUser(username!, password: password!, id: newUserObjectID, sender: sender)
             
         })
-        
-        
-        
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewDidAppear(animated: Bool) {
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let name = prefs.stringForKey("email") {
-//            display TOPICVIEW
-            
+        if let name = prefs.stringForKey("username") {
+            print("Displaying second view")
+            //            display TOPICVIEW
+            performSegueWithIdentifier("loginSuccess", sender: nil)
             
         } else {
-//            display LOGINVIEW
+            print("Lying, not displaying anything")
+            //            display LOGINVIEW
             
         }
-
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    
     func dealWithNewUsers(email:String, password: String, sender: AnyObject) {
         let query = PFQuery(className:"userToID")
         query.getObjectInBackgroundWithId(String(userToIDString)) {
@@ -196,6 +201,7 @@ class LoginViewController: UIViewController {
         prefs.setValue(email, forKey: "username")
         prefs.setValue(password, forKey: "password")
         prefs.setValue(id, forKey: "userID")
+        
         performSegueWithIdentifier("loginSuccess", sender: sender)
     }
 

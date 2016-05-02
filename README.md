@@ -5,14 +5,15 @@
 * Ruijing Li 
 
 ## Purpose
-* A top ten list of various aspects nearby in the area, created by users,   
+* A top ten list of various aspects nearby in the area, created by users, 
+<br>
 voted by users.
 
 ##Features
 * Ability to create handle
 * Users can vote on every top ten list to create a holistic top ten
-* Users can suggest a ton ten topic
-* Users can vote on potential ton ten topics
+* Users can suggest a top ten topic
+* Users can vote on potential top ten topics
 * Topic most voted on will be created at the end of the day 
 
 ## Control Flow
@@ -21,7 +22,8 @@ voted by users.
 * First row: New top-ten topic of the day
 * Rest of the rows will have top-ten topics with the top item shown
 * Users can tap on one of the top-ten to vote
-* When user taps on one of the top-ten, they will be presented with  
+* When user taps on one of the top-ten, they will be presented with 
+<br>
 table view modally
 * Note, the top ten will be highlighted for emphasis
 * The new table view will have a top ten list of items for a user to vote on
@@ -50,3 +52,8 @@ table view modally
 * ItemTableViewController
 * TopicTableViewController
 * PotentialTopicTableViewController
+
+
+## Credits
+* Parse for backend storage, so we could save user data, their posts,
+
