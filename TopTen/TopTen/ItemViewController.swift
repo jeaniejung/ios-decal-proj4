@@ -139,7 +139,9 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let itemString = itemArray[indexPath.row]["title"] as! String
         cell.itemName.text = itemString
         cell.itemRank.text = String(indexPath.row + 1)
-        cell.votes.text = String(itemTitleToVotes[itemString]!)
+        if itemTitleToVotes[itemString] != nil {
+            cell.votes.text = String(itemTitleToVotes[itemString]!)
+        }
         print(cell.itemRank.text)
         return cell
         
