@@ -10,6 +10,7 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var votes: UILabel!
     @IBOutlet var itemName: UILabel!
     @IBOutlet var itemRank: UILabel!
     

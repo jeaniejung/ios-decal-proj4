@@ -16,10 +16,63 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var topicID: String!
     var itemArray: [PFObject]!
     var topic: Topic!
+    var itemTitleToID: [String : String]!
+    var itemTitleToVotes: [String : Int]!
+    @IBAction func upVote(sender: AnyObject) {
+        let buttonRow = sender.tag
+        let up = PFObject(className:"upvoteItem")
+        var rowIndex = sender.tag
+        let myItem = itemArray[rowIndex]
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let name = prefs.stringForKey("email") {
+            up["username"] = name
+        }
+        up["itemID"] = myItem.objectId
+        up.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+            } else {
+                // There was a problem, check error.description
+            }
+        }
+        self.itemTitleToVotes[String(myItem["title"])] = self.votesOf(myItem)
+        updateVotes()
+    }
     
+    @IBAction func downVote(sender: AnyObject) {
+        let buttonRow = sender.tag
+        let down = PFObject(className:"downvoteItem")
+        var rowIndex = sender.tag
+        let myItem = itemArray[rowIndex]
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let name = prefs.stringForKey("email") {
+            down["username"] = name
+        }
+        down["itemID"] = myItem.objectId
+        down.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+            } else {
+                // There was a problem, check error.description
+            }
+        }
+        self.itemTitleToVotes[String(myItem["title"])] = self.votesOf(myItem)
+        updateVotes()
+        
+    }
+    func updateVotes() {
+        self.itemTableView.reloadData()
+
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         itemArray = [PFObject]()
+
+        itemTitleToID = [String : String]()
+        itemTitleToVotes = [String : Int]()
         retrieveItemsOfTopic()
         let delay = 5.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -69,10 +122,14 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath) as! ItemTableViewCell
         // Configure the cell...
-        cell.itemName.text = itemArray[indexPath.row]["title"] as! String
+        let itemString = itemArray[indexPath.row]["title"] as! String
+        cell.itemName.text = itemString
         cell.itemRank.text = String(indexPath.row + 1)
+        cell.votes.text = String(itemTitleToVotes[itemString]!)
+        cell.tag = indexPath.row
         print(cell.itemRank.text)
         return cell
+        
     }
     
     @IBAction func addItem(sender: UIButton) {
@@ -95,13 +152,35 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         itemTableView.reloadData()
     }
     
-//    func sortItems() {
-//        itemArray = itemArray.sort({a, b in votesOf(a) > votesOf(b)})
-//    }
-//    
-//    func votesOf(item: Item) {
-//        
-//    }
+    func sortItems() {
+        itemArray = itemArray.sort({a, b in itemTitleToVotes[a["title"] as! String]! > itemTitleToVotes[b["title"] as! String]!})
+    }
+    
+    func votesOf(item: PFObject) -> Int{
+        var upvotes = 0
+        var downvotes = 0
+        let query1 = PFQuery(className: "upvoteItem")
+        query1.whereKey("itemID", equalTo: item.objectId!)
+        query1.findObjectsInBackgroundWithBlock {
+            (items: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                upvotes = items!.count
+                
+            }else{
+            }
+        }
+        let query = PFQuery(className: "downvoteItem")
+        query.whereKey("itemID", equalTo: item.objectId!)
+        query.findObjectsInBackgroundWithBlock {
+            (items: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                downvotes = items!.count
+                
+            }else{
+            }
+        }
+        return upvotes - downvotes
+    }
     
     func retrieveItemsOfTopic() {
         let query = PFQuery(className: "Item")
@@ -111,7 +190,10 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if error == nil {
                 for item in items! {
                     if let myItem = item as PFObject? {
+                        let titleString = myItem["title"] as! String
                         self.itemArray.append(myItem)
+                        self.itemTitleToID[titleString] = myItem.objectId
+                        self.itemTitleToVotes[titleString] = self.votesOf(item)
                     }                }
                 self.itemTableView.reloadData()
                 
@@ -119,7 +201,6 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.itemTableView.reloadData()
             }
         }
-        
     }
     
     
