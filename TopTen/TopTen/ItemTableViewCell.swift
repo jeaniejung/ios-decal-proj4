@@ -13,7 +13,6 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet var itemName: UILabel!
     @IBOutlet var itemRank: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

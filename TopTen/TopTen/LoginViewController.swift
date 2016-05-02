@@ -14,11 +14,12 @@ class LoginViewController: UIViewController {
     let userToIDString = "cHLdDIagBH"
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var UsernameTextField: UITextField!
+    
     @IBAction func signInMethod(sender: AnyObject) {
         initiateMapIfNotExist()
         let username = UsernameTextField.text
         let password = PasswordTextField.text
-        dealWithNewUsers(username!, password: password!)
+        dealWithNewUsers(username!, password: password!, sender: sender)
         
     }
 
@@ -34,10 +35,20 @@ class LoginViewController: UIViewController {
             if success {
                 print("Object has been saved.")
                 newUserObjectID = newUser.objectId! as String
+                print("ID: " + newUserObjectID)
             }
         }
+        let delay = 1.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         
-        self.addNewUser(username!, id: newUserObjectID)
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            
+            // here code perfomed with delay
+            print("Here is id " + newUserObjectID)
+            self.addNewUser(username!, password: password!, id: newUserObjectID, sender: sender)
+            
+        })
+        
         
         
     }
@@ -48,13 +59,14 @@ class LoginViewController: UIViewController {
         if let name = prefs.stringForKey("email") {
 //            display TOPICVIEW
             
+            
         } else {
 //            display LOGINVIEW
             
         }
 
     }
-    func dealWithNewUsers(email:String, password: String) {
+    func dealWithNewUsers(email:String, password: String, sender: AnyObject) {
         let query = PFQuery(className:"userToID")
         query.getObjectInBackgroundWithId(String(userToIDString)) {
             (userToID: PFObject?, error: NSError?) -> Void in
@@ -89,12 +101,20 @@ class LoginViewController: UIViewController {
                             print(error)
                         }
                         realPassword = myUniqueUser!["password"] as! String
+                        print("Real password inside get" + realPassword)
                     }
-                    if password == realPassword {
-                        self.allowLogin(email, password: password, id: myID!)
-                    } else {
-                        self.displayError()
-                    }
+                    let delay = 1.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+                    let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    
+                    dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                        print("Real Password " +  realPassword)
+                        print("Password " + password)
+                        if password == realPassword {
+                            self.allowLogin(email, password: password, id: myID!, sender: sender)
+                        } else {
+                            self.displayError()
+                        }
+                    })
                     
                 }
                 else {
@@ -106,7 +126,6 @@ class LoginViewController: UIViewController {
 
     }
     func displayError() {
-       
         let alertController = UIAlertController(title: "Wrong Username/Password", message: "Sign up if new user", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             // ...
@@ -116,19 +135,43 @@ class LoginViewController: UIViewController {
             // ...
         }
     }
-    func addNewUser(email: String, id: String) {
+    func displayExistingUserError() {
+        let alertController = UIAlertController(title: "Username already exists", message: "Please try a different username", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            // ...
+        }
+        alertController.addAction(OKAction)
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+    }
+    func addNewUser(email: String, password: String, id: String, sender: AnyObject) {
         let query = PFQuery(className:"userToID")
         query.getObjectInBackgroundWithId(userToIDString) {
             (userToID: PFObject?, error: NSError?) -> Void in
             if error !=
                 nil {
                 print(error)
-            } else if var myMap = userToID!["map"] as? [String : String]{
-                myMap[email] = id
-                userToID!["map"] = myMap
-                userToID!.saveInBackground()
+            } else if let userToID = userToID {
+                print("Hi")
+                var myMap = userToID["map"] as! [String : String]
+                if let targetID = myMap[email] {
+//                    email already exists
+                    self.displayExistingUserError()
+                } else {
+                    myMap[email] = id
+                    print("1")
+                    print(myMap[email])
+                    userToID["map"] = myMap
+                    print("2")
+                    print(userToID["map"])
+                    userToID.saveInBackground()
+                    self.allowLogin(email, password: password, id: id, sender: sender)
+                }
             }
         }
+        
+        
     }
     func initiateMapIfNotExist() {
         let query = PFQuery(className:"userToID")
@@ -148,11 +191,12 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func allowLogin(email: String, password: String, id: String) {
+    func allowLogin(email: String, password: String, id: String, sender: AnyObject) {
         let prefs = NSUserDefaults.standardUserDefaults()
         prefs.setValue(email, forKey: "username")
         prefs.setValue(password, forKey: "password")
         prefs.setValue(id, forKey: "userID")
+        performSegueWithIdentifier("loginSuccess", sender: sender)
     }
 
     override func didReceiveMemoryWarning() {

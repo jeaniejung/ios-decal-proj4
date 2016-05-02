@@ -24,6 +24,7 @@ class PotentialTopicViewController: UIViewController, UITableViewDataSource, UIT
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.potentialTopicTableView.delegate = self
         self.potentialTopicTableView.dataSource = self
+        setTimer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +51,10 @@ class PotentialTopicViewController: UIViewController, UITableViewDataSource, UIT
         // Configure the cell...
 
         return cell
+    }
+    
+    func setTimer() {
+        
     }
 
     /*

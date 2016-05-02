@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Parse
 
 class TopicTableViewController: UITableViewController {
-
+    var topicList: [Topic]!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,7 +21,51 @@ class TopicTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        topicList = [Topic]()
+        retrieveTopicList()
+        let topic = Topic()
+        topic.topicTitle = "BOBA"
+        let item = Item()
+        item.itemDescription = "Sharetea"
+        topic.items = [item]
+        topic.clicks = 100
+        self.topicList.append(topic)
+        self.tableView.reloadData()
     }
+    
+    func retrieveTopicList() {
+        
+        let query = PFQuery(className:"Topic")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil{
+                print("Yes")
+                for object in objects! {
+                    //Set test to total (assuming self.test is Int)
+                    let topic = Topic()
+                    topic.topicTitle = object["title"] as! String
+                    topic.items = object["items"] as! Array
+                    topic.clicks = object["clicks"] as! Int
+                    self.topicList.append(topic)
+                }
+                self.tableView.reloadData()
+            }else{
+                //Handle error
+                //Fake data
+                print("Hi")
+                let topic = Topic()
+                topic.topicTitle = "BOBA"
+                let item = Item()
+                item.itemDescription = "Sharetea"
+                topic.items = [item]
+                topic.clicks = 100
+                self.topicList.append(topic)
+                self.tableView.reloadData()
+            }
+        }
+       
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -34,16 +81,29 @@ class TopicTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return topicList.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as! TopicTableViewCell
-
+        
          //Configure the cell...
-
+        cell.topicClicks.text = String(topicList[indexPath.row].clicks)
+        cell.topicName.text = topicList[indexPath.row].topicTitle
+        cell.topicAnswer.text = topicList[indexPath.row].getTop().itemDescription
+        cell.num = indexPath.row
         return cell
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToItemView" {
+            let targetVC = segue.destinationViewController as! ItemViewController
+            targetVC.topicName = sender?.topicName
+            let cell = sender as! TopicTableViewCell
+            targetVC.itemsList = topicList[cell.num].items
+        }
     }
  
 

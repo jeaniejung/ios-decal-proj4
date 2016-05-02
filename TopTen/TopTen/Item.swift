@@ -10,6 +10,13 @@ import UIKit
 
 class Item: NSObject {
     var itemDescription: String!
-    var votes: Int!
+    var upvotes: Int!
+    var downvotes: Int!
+    var votes: Int = 0
+    
+    func calculateVotes() -> Int {
+        votes = upvotes - downvotes
+        return votes
+    }
 
 }

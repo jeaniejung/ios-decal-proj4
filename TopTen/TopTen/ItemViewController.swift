@@ -13,6 +13,8 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var topicName: UILabel!
     @IBOutlet var itemSuggestTextField: UITextField!
     
+    var itemsList: [Item]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +25,9 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.itemTableView.delegate = self
         self.itemTableView.dataSource = self
+        if itemsList == nil {
+            itemsList = [Item]()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,17 +44,32 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return itemsList.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath) as! ItemTableViewCell
-
         // Configure the cell...
-
+        cell.itemName.text = itemsList[indexPath.row].itemDescription
+        cell.itemRank.text = String(indexPath.row + 1)
+        print(cell.itemRank.text)
         return cell
     }
- 
+    
+    @IBAction func addItem(sender: UIButton) {
+        if itemsList.count < 10  && itemSuggestTextField?.text != "" {
+            let item = Item()
+            item.itemDescription = itemSuggestTextField.text
+            itemsList.append(item)
+            itemSuggestTextField.text = ""
+            sortItems()
+        }
+        itemTableView.reloadData()
+    }
+    
+    func sortItems() {
+        itemsList = itemsList.sort({a, b in a.votes > b.votes})
+    }
 
     /*
     // Override to support conditional editing of the table view.

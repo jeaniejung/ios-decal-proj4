@@ -13,7 +13,7 @@ class TopicTableViewCell: UITableViewCell {
     @IBOutlet var topicClicks: UILabel!
     @IBOutlet var topicName: UILabel!
     @IBOutlet var topicAnswer: UILabel!
-    
+    var num: Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
