@@ -12,7 +12,7 @@ class Item: NSObject {
     var itemDescription: String!
     var upvotes: Int!
     var downvotes: Int!
-    var votes: Int = 0
+    var votes: Int!
     
     func calculateVotes() -> Int {
         votes = upvotes - downvotes

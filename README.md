@@ -5,8 +5,7 @@
 * Ruijing Li 
 
 ## Purpose
-* A top ten list of various aspects nearby in the area, created by users, 
-<br>
+* A top ten list of various aspects nearby in the area, created by users,   
 voted by users.
 
 ##Features
@@ -22,8 +21,7 @@ voted by users.
 * First row: New top-ten topic of the day
 * Rest of the rows will have top-ten topics with the top item shown
 * Users can tap on one of the top-ten to vote
-* When user taps on one of the top-ten, they will be presented with 
-<br>
+* When user taps on one of the top-ten, they will be presented with   
 table view modally
 * Note, the top ten will be highlighted for emphasis
 * The new table view will have a top ten list of items for a user to vote on
@@ -55,5 +53,6 @@ table view modally
 
 
 ## Credits
-* Parse for backend storage, so we could save user data, their posts,
+* Parse for backend storage, so we could save user data, their posts,  
+and votes.
 

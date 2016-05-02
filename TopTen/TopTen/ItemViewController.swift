@@ -18,13 +18,14 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var topic: Topic!
     var itemTitleToID: [String : String]!
     var itemTitleToVotes: [String : Int]!
+    var votes: Int!
+    
     @IBAction func upVote(sender: AnyObject) {
-        let buttonRow = sender.tag
         let up = PFObject(className:"upvoteItem")
         var rowIndex = sender.tag
         let myItem = itemArray[rowIndex]
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let name = prefs.stringForKey("email") {
+        if let name = prefs.stringForKey("username") {
             up["username"] = name
         }
         up["itemID"] = myItem.objectId
@@ -36,17 +37,22 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 // There was a problem, check error.description
             }
         }
-        self.itemTitleToVotes[String(myItem["title"])] = self.votesOf(myItem)
-        updateVotes()
+        self.votesOf(myItem)
+        let delay = 3.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.itemTitleToVotes[String(myItem["title"])] = self.votes
+            self.updateVotes()
+        })
     }
     
     @IBAction func downVote(sender: AnyObject) {
-        let buttonRow = sender.tag
         let down = PFObject(className:"downvoteItem")
         var rowIndex = sender.tag
         let myItem = itemArray[rowIndex]
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let name = prefs.stringForKey("email") {
+        if let name = prefs.stringForKey("username") {
             down["username"] = name
         }
         down["itemID"] = myItem.objectId
@@ -58,8 +64,16 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 // There was a problem, check error.description
             }
         }
-        self.itemTitleToVotes[String(myItem["title"])] = self.votesOf(myItem)
-        updateVotes()
+//        self.itemTitleToVotes[String(myItem["title"])] = self.votesOf(myItem)
+//        updateVotes()
+        self.votesOf(myItem)
+        let delay = 3.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.itemTitleToVotes[String(myItem["title"])] = self.votes
+            self.updateVotes()
+        })
         
     }
     func updateVotes() {
@@ -74,7 +88,7 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         itemTitleToID = [String : String]()
         itemTitleToVotes = [String : Int]()
         retrieveItemsOfTopic()
-        let delay = 5.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let delay = 3.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
@@ -126,11 +140,11 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.itemName.text = itemString
         cell.itemRank.text = String(indexPath.row + 1)
         cell.votes.text = String(itemTitleToVotes[itemString]!)
-        cell.tag = indexPath.row
         print(cell.itemRank.text)
         return cell
         
     }
+    
     
     @IBAction func addItem(sender: UIButton) {
         if itemArray.count < 10  && itemSuggestTextField?.text != "" {
@@ -165,7 +179,7 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
             (items: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 upvotes = items!.count
-                
+                print(upvotes)
             }else{
             }
         }
@@ -175,11 +189,21 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
             (items: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 downvotes = items!.count
-                
+                print(downvotes)
             }else{
             }
         }
+        let delay = 3.0 * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+
+            self.votes = upvotes - downvotes
+        })
+        print(upvotes - downvotes)
+        
         return upvotes - downvotes
+        
     }
     
     func retrieveItemsOfTopic() {
