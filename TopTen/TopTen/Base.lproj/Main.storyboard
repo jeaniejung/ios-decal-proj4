@@ -234,9 +234,9 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sA3-ec-dmK">
-                                <rect key="frame" x="274" y="510" width="52" height="33"/>
+                                <rect key="frame" x="221.5" y="510" width="157" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="52" id="ihM-tM-Ebg"/>
+                                    <constraint firstAttribute="width" constant="157" id="eEc-hm-wjr"/>
                                     <constraint firstAttribute="height" constant="33" id="wL9-zd-SUu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>

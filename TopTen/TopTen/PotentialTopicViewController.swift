@@ -55,6 +55,16 @@ class PotentialTopicViewController: UIViewController, UITableViewDataSource, UIT
     
     func setTimer() {
         
+        let date = NSDate()
+        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let newDate = cal.startOfDayForDate(date)
+        
+        let intervalDate = newDate.timeIntervalSinceNow
+        let interval = Int(intervalDate)
+        let seconds = 60 - ((-1 * interval) % 60)
+        let minutes = 60 - (((-1 * interval) / 60) % 60)
+        let hours = 24 - ((-1 * interval) / 3600)
+        timer.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     /*
