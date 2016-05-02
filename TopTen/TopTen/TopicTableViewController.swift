@@ -11,7 +11,8 @@ import Parse
 
 class TopicTableViewController: UITableViewController {
     var topicList: [Topic]!
-    
+    var updatedItemList: [Item]!
+    var currentTopic: Topic!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +34,24 @@ class TopicTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if updatedItemList != nil && currentTopic != nil {
+            currentTopic.items = updatedItemList
+            if topicList.contains(currentTopic) {
+                let index = topicList.indexOf(currentTopic)
+                topicList.removeAtIndex(index!)
+                topicList.append(currentTopic)
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
     func retrieveTopicList() {
         
         let query = PFQuery(className:"Topic")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil{
+            if error == nil {
                 print("Yes")
                 for object in objects! {
                     //Set test to total (assuming self.test is Int)
@@ -103,6 +116,7 @@ class TopicTableViewController: UITableViewController {
             targetVC.topicName = sender?.topicName
             let cell = sender as! TopicTableViewCell
             targetVC.itemsList = topicList[cell.num].items
+            targetVC.topic = topicList[cell.num]
         }
     }
  

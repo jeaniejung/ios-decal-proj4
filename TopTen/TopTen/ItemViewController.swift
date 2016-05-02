@@ -14,6 +14,7 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var itemSuggestTextField: UITextField!
     
     var itemsList: [Item]!
+    var topic: Topic!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,14 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if itemsList == nil {
             itemsList = [Item]()
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        let sourceVC = navigationController?.viewControllers.first as! TopicTableViewController
+        sourceVC.currentTopic = topic
+        sourceVC.updatedItemList = itemsList
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,6 +79,7 @@ class ItemViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func sortItems() {
         itemsList = itemsList.sort({a, b in a.votes > b.votes})
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
